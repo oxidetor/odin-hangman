@@ -1,11 +1,11 @@
 module Display
   def display_game_intro
-    puts 'Welcome to Hangman!'
+    puts "Welcome to Hangman!\n"
   end
 
   def display_game_board(game)
-    puts "WORD: #{obscure_unguessed_letters(game.secret_word, game.guessed_letters)}" \
-         "\n\nGUESSED: #{game.guessed_letters}\tLIVES: #{game.lives}\n"
+    puts "\nWORD: #{obscure_unguessed_letters(game.secret_word, game.guessed_letters)}" \
+         "\n\nWRONG GUESSES: #{game.guessed_letters - game.secret_word.split('')}\tLIVES: #{game.lives}\n"
   end
 
   def obscure_unguessed_letters(word, guessed_letters)
@@ -14,10 +14,10 @@ module Display
 
   def display_result(game)
     display_game_board(game)
-    puts game.word_solved? ? 'You win' : 'You lose'
+    puts game.word_solved? ? "\nYou win\n" : "\nYou lose\n"
   end
 
   def display_guess_prompt
-    puts 'Enter your letter guess'
+    puts "\nEnter your letter guess\n"
   end
 end
