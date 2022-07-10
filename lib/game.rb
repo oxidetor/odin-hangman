@@ -3,12 +3,12 @@ require './lib/display'
 class Game
   include Display
   attr_reader :secret_word
-  attr_accessor :guessed_letters
+  attr_accessor :guessed_letters, :lives
 
   def initialize
     @secret_word = select_random_word
     @guessed_letters = []
-    @turn = 0
+    @lives = 10
   end
 
   # Get random word from dictionary
@@ -25,13 +25,13 @@ class Game
     display_game_intro
     until game_over?
       play_turn
-      @turn += 1
+      self.lives -= 1
     end
     display_result
   end
 
   def game_over?
-    @turn > 10 || word_solved?
+    lives.zero? || word_solved?
   end
 
   def word_solved?
@@ -39,7 +39,7 @@ class Game
   end
 
   def play_turn
-    display_game_board(@turn)
+    display_game_board(self)
     guess = ''
     until valid_guess?(guess)
       display_guess_prompt
