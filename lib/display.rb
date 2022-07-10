@@ -1,6 +1,7 @@
 module Display
   def display_game_intro
     puts "Welcome to Hangman!\n"
+    puts "Enter 'LOAD' to load an existing game or any other character to play a new game"
   end
 
   def display_game_board(game)

@@ -27,8 +27,13 @@ class Game
 
   def play_game
     display_game_intro
+    load_game if gets.chomp.upcase == 'LOAD'
     play_turn until game_over?
     display_result(self)
+  end
+
+  def load_game
+    File.open('savegame.txt') { |file| unserialize(file.read) }
   end
 
   def game_over?
