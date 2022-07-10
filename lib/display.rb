@@ -9,7 +9,7 @@ module Display
   end
 
   def obscure_unguessed_letters(word, guessed_letters)
-    word.split('').map { |letter| guessed_letters.include?(letter.upcase) ? " #{letter} " : ' _ ' }.join
+    word.split('').map { |letter| guessed_letters.include?(letter) ? " #{letter} " : ' _ ' }.join
   end
 
   def display_result

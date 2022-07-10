@@ -16,17 +16,15 @@ class Game
     File.open('dictionary.txt') do |file|
       file.readlines
           .map(&:chomp)
-          .filter { |word| word.length.between?(5, 10) }
+          .filter { |word| word.length.between?(5, 12) }
           .sample
+          .upcase
     end
   end
 
   def play_game
     display_game_intro
-    until game_over?
-      play_turn
-      self.lives -= 1
-    end
+    play_turn until game_over?
     display_result
   end
 
@@ -46,6 +44,11 @@ class Game
       guess = gets.upcase.chomp
     end
     guessed_letters.push(guess)
+    self.lives -= 1 unless correct_guess?(guess)
+  end
+
+  def correct_guess?(guess)
+    secret_word.split('').include?(guess)
   end
 
   def valid_guess?(guess)
