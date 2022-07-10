@@ -25,7 +25,7 @@ class Game
   def play_game
     display_game_intro
     play_turn until game_over?
-    display_result
+    display_result(self)
   end
 
   def game_over?
@@ -33,7 +33,7 @@ class Game
   end
 
   def word_solved?
-    false
+    secret_word.split('') - guessed_letters == []
   end
 
   def play_turn

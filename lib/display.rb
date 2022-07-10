@@ -12,8 +12,9 @@ module Display
     word.split('').map { |letter| guessed_letters.include?(letter) ? " #{letter} " : ' _ ' }.join
   end
 
-  def display_result
-    puts 'Game Over!'
+  def display_result(game)
+    display_game_board(game)
+    puts game.word_solved? ? 'You win' : 'You lose'
   end
 
   def display_guess_prompt
