@@ -1,4 +1,3 @@
-# Save selected word somewhere inside the game instance
 # Display an intro message to the user
 # Display the occluded word and number of guesses left to user
 # Prompt user to provide a letter
@@ -11,4 +10,4 @@
 require './lib/game'
 
 game = Game.new
-p game.secret_word
+game.play_game
