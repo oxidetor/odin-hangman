@@ -9,3 +9,8 @@
 # Provide feedback for the user's guess
 # End the game if out of turns or saved word is guessed
 # Display final message to user based on result
+
+require './lib/game'
+
+game = Game.new
+p game.select_random_word
