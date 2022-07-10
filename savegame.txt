@@ -1,0 +1,1 @@
+{"@secret_word":"GENDER","@guessed_letters":["A","B","E","S","T","R"],"@lives":6}

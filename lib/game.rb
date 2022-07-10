@@ -1,6 +1,9 @@
 require './lib/display'
+require './lib/serializable'
+require 'yaml'
 
 class Game
+  include Serializable
   include Display
   attr_reader :secret_word
   attr_accessor :guessed_letters, :lives
@@ -42,9 +45,15 @@ class Game
     until valid_guess?(guess)
       display_guess_prompt
       guess = gets.upcase.chomp
+      save_and_exit if guess == '1'
     end
     guessed_letters.push(guess)
     self.lives -= 1 unless correct_guess?(guess)
+  end
+
+  def save_and_exit
+    File.open('savegame.txt', 'w') { |file| file.write serialize }
+    exit
   end
 
   def correct_guess?(guess)
