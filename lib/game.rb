@@ -1,5 +1,9 @@
 class Game
-  def initialize; end
+  attr_reader :secret_word
+
+  def initialize
+    @secret_word = select_random_word
+  end
 
   # Get random word from dictionary
   def select_random_word
