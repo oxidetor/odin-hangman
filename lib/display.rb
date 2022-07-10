@@ -1,12 +1,13 @@
 module Display
   def display_game_intro
-    puts "Welcome to Hangman!\n"
-    puts "Enter 'LOAD' to load an existing game or any other character to play a new game"
+    puts "Welcome to Hangman!\n" \
+         "\nEnter 'LOAD' to load your previous game or " \
+         'any other character to play a new game'
   end
 
   def display_game_board(game)
     puts "\nWORD: #{obscure_unguessed_letters(game.secret_word, game.guessed_letters)}" \
-         "\n\nWRONG GUESSES: #{game.guessed_letters - game.secret_word.split('')}\tLIVES: #{game.lives}\n"
+         "\n\nWRONG GUESSES: #{game.guessed_letters - game.secret_word.split('')}\t\tLIVES: #{game.lives}\n"
   end
 
   def obscure_unguessed_letters(word, guessed_letters)
@@ -19,6 +20,8 @@ module Display
   end
 
   def display_guess_prompt
-    puts "\nEnter your letter guess\n"
+    print "\nEnter your guess (letter from A-Z)" \
+         " or enter 'SAVE' to save and exit the game\n" \
+         ' ==> '
   end
 end

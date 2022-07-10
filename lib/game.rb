@@ -14,7 +14,6 @@ class Game
     @lives = 10
   end
 
-  # Get random word from dictionary
   def select_random_word
     File.open('dictionary.txt') do |file|
       file.readlines
@@ -34,6 +33,8 @@ class Game
 
   def load_game
     File.open('savegame.txt') { |file| unserialize(file.read) }
+  rescue StandardError
+    puts "\nCouldn't load previously saved game. Starting new game ..."
   end
 
   def game_over?
@@ -50,14 +51,19 @@ class Game
     until valid_guess?(guess)
       display_guess_prompt
       guess = gets.upcase.chomp
-      save_and_exit if guess == '1'
+      save_and_exit if guess == 'SAVE'
     end
     guessed_letters.push(guess)
     self.lives -= 1 unless correct_guess?(guess)
   end
 
   def save_and_exit
-    File.open('savegame.txt', 'w') { |file| file.write serialize }
+    begin
+      File.open('savegame.txt', 'w') { |file| file.write serialize }
+    rescue StandardError => e
+      "\nError. Game could not be saved!\n"
+    end
+    puts "\nGame successfully saved. Thanks for playing!\n"
     exit
   end
 
