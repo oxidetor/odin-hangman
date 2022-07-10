@@ -3,8 +3,8 @@ module Display
     puts 'Welcome to Hangman!'
   end
 
-  def display_game_board
-    puts 'Game Board'
+  def display_game_board(turn)
+    puts turn.to_s + 'Game Board'
   end
 
   def display_result

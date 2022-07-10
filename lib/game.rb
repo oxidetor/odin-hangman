@@ -8,7 +8,7 @@ class Game
   def initialize
     @secret_word = select_random_word
     @guessed_letters = []
-    @turns = 0
+    @turn = 0
   end
 
   # Get random word from dictionary
@@ -25,13 +25,13 @@ class Game
     display_game_intro
     until game_over?
       play_turn
-      @turns += 1
+      @turn += 1
     end
     display_result
   end
 
   def game_over?
-    @turns > 10 || word_solved?
+    @turn > 10 || word_solved?
   end
 
   def word_solved?
@@ -39,9 +39,18 @@ class Game
   end
 
   def play_turn
-    display_game_board
-    display_guess_prompt
-    guess = gets.chomp
+    display_game_board(@turn)
+    guess = ''
+    until valid_guess?(guess)
+      display_guess_prompt
+      guess = gets.upcase.chomp
+    end
     guessed_letters.push(guess)
+  end
+
+  def valid_guess?(guess)
+    guess.match?(/[A-Z]/) &&
+      !guessed_letters.include?(guess) &&
+      guess.length == 1
   end
 end
