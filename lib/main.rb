@@ -11,3 +11,4 @@ require './lib/game'
 
 game = Game.new
 game.play_game
+p game.guessed_letters
